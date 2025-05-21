@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import accesoService from "./service/accesoService";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [accesos, setAccesos] = useState([]);
+  useEffect(() => {
+    accesoService
+      .getTodayAccess()
+      .then((data) => {
+        console.log("Respuesta de getTodayAccess:", data);
+        setAccesos(data.data);
+      })
+      .catch((err) => console.error("Error:", err));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Listado Accesos</h1>
+      {accesos.map((a) => (
+        <div key={a.id_registro}>
+          {a.nombre_completo} - {a.estado_acceso}
+        </div>
+      ))}
     </div>
   );
 }
