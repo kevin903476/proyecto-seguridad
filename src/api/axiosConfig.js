@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosConfig = axios.create({
-  baseURL: 'https://api-seguridad-qzw2.onrender.com', 
+  baseURL: 'https://marvellous-muskox-kevin903476-82a785f6.koyeb.app', 
   headers: {
     'Content-Type': 'application/json'
   }
